@@ -20,7 +20,21 @@ namespace AdventOfCode.Tests
         {
             var solver = new Solver();
 
-            var result = solver.SumOfRepeatedNumbers(sequence);
+            var result = solver.SumOfRepeatedNumbersNextDigit(sequence);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("1212", 6)]
+        [TestCase("1221", 0)]
+        [TestCase("123425", 4)]
+        [TestCase("123123", 12)]
+        [TestCase("12131415", 4)]
+        public void PartTwo(string sequence, double expected)
+        { 
+            var solver = new Solver();
+
+            var result = solver.SumOfRepeatedNumbersExtended(sequence);
 
             Assert.AreEqual(expected, result);
         }

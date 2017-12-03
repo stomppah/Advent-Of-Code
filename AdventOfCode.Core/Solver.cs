@@ -6,15 +6,10 @@ namespace AdventOfCode.Core
 {
     public class Solver
     {
-        public double SumOfRepeatedNumbers(string sequence)
+        public double SumOfRepeatedNumbersNextDigit(string sequence)
         {
-            long[] digits = new long[sequence.Length];
-            for (int sequenceIndex = 0; sequenceIndex < sequence.Length; sequenceIndex++)
-            {
-                long digit;
-                Int64.TryParse(sequence.Substring(sequenceIndex, 1), out digit);
-                digits[sequenceIndex] = digit;
-            }
+            long[] digits = sequence.ConvertToLongArray();
+
             List<long> matches = new List<long>();
             for (int digitIndex = 0; digitIndex < digits.Length; digitIndex++)
             {
@@ -24,6 +19,33 @@ namespace AdventOfCode.Core
                     matches.Add(digits[digitIndex]);
                 }
             }
+
+            return matches.Sum();
+        }
+
+        public double SumOfRepeatedNumbersExtended(string sequence)
+        {
+            long[] digits = sequence.ConvertToLongArray();
+            var deltaIndex = digits.Length / 2;
+
+            List<long> matches = new List<long>();
+            for (int digitIndex = 0; digitIndex < digits.Length; digitIndex++)
+            {
+                long nextDigitInSequence;
+                if ((digitIndex + deltaIndex) <= digits.Length - 1)
+                {
+                    nextDigitInSequence = digits[digitIndex + deltaIndex];
+                }
+                else
+                {
+                    nextDigitInSequence = digits[(digitIndex + deltaIndex) - (digits.Length)];
+                }
+                if (digits[digitIndex] == nextDigitInSequence)
+                {
+                    matches.Add(digits[digitIndex]);
+                }
+            }
+
             return matches.Sum();
         }
     }
