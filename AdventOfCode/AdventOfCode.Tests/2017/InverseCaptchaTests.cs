@@ -1,12 +1,12 @@
-﻿using System;
+﻿using AdventOfCode._2017;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdventOfCode.Core;
 using Xunit;
 
-namespace AdventOfCode.Tests
+namespace AdventOfCode.Tests._2017
 {
     
     public class InverseCaptchaTests
@@ -32,7 +32,7 @@ namespace AdventOfCode.Tests
         [InlineData("123123", 12)]
         [InlineData("12131415", 4)]
         public void PartTwo(string sequence, double expected)
-        { 
+        {
             var solver = new Solver();
 
             var result = solver.SumOfRepeatedNumbersExtended(sequence);

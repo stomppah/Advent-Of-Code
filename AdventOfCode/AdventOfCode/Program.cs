@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdventOfCode.Core;
 
 namespace AdventOfCode
 {
@@ -11,7 +6,7 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            var solver = new Solver();
+            var solver = new _2017.Solver();
 
             var answer = solver.SumOfRepeatedNumbersNextDigit(PuzzleInputs.DayOne);
             Console.Write($"Day One (1) Answer: {answer}");

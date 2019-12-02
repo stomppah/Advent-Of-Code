@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AdventOfCode.Tests
+namespace AdventOfCode.Tests._2017
 {
     
     public class SpiralMemoryTests

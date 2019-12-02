@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCode.Core
+namespace AdventOfCode
 {
-    public static class StringExtensions
+    public static class MyExtensions
     {
 
         public static long[] ConvertToLongArray(this string sequence)
@@ -38,5 +38,41 @@ namespace AdventOfCode.Core
             }
             return table;
         }
-    }
+
+		// https://rosettacode.org/wiki/Tokenize_a_string_with_escaping#C.23
+		public static IEnumerable<string> Tokenize(this string input, char separator = '\n', char escape = '^')
+		{
+			if (input == null) yield break;
+			var buffer = new StringBuilder();
+			bool escaping = false;
+			foreach (char c in input)
+			{
+				if (escaping)
+				{
+					buffer.Append(c);
+					escaping = false;
+				}
+				else if (c == escape)
+				{
+					escaping = true;
+				}
+				else if (c == separator)
+				{
+					yield return buffer.Flush();
+				}
+				else
+				{
+					buffer.Append(c);
+				}
+			}
+			if (buffer.Length > 0 || input[input.Length - 1] == separator) yield return buffer.Flush();
+		}
+
+		public static string Flush(this StringBuilder stringBuilder)
+		{
+			string result = stringBuilder.ToString();
+			stringBuilder.Clear();
+			return result;
+		}
+	}
 }

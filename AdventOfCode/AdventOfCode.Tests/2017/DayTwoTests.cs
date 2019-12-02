@@ -1,17 +1,16 @@
-﻿using System;
+﻿using AdventOfCode._2017;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdventOfCode.Core;
-using NUnit.Framework;
+using Xunit;
 
-namespace AdventOfCode.Tests
+namespace AdventOfCode.Tests._2017
 {
-    [TestFixture]
     public class DayTwoTests
     {
-        [Test]
+        [Fact]
         public void PartOne()
         {
             string spreadsheet =
@@ -20,10 +19,10 @@ namespace AdventOfCode.Tests
 2 4 6 8";
             var result = new Solver().CalculateChecksum(spreadsheet);
 
-            Assert.AreEqual(18, result);
+            Assert.Equal(18, result);
         }
 
-        [Test]
+        [Fact]
         public void PartTwo()
         {
             string spreadsheet =
@@ -32,7 +31,7 @@ namespace AdventOfCode.Tests
 3 8 6 5";
             var result = new Solver().CalculateChecksumExtended(spreadsheet);
 
-            Assert.AreEqual(9, result);
+            Assert.Equal(9, result);
         }
 
     }
