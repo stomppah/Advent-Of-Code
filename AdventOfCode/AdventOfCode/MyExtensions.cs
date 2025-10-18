@@ -14,7 +14,6 @@ namespace AdventOfCode
             long[] digits = new long[sequence.Length];
             for (int sequenceIndex = 0; sequenceIndex < sequence.Length; sequenceIndex++)
             {
-                long digit;
                 Int64.TryParse(sequence.Substring(sequenceIndex, 1), out digits[sequenceIndex]);
             }
             return digits;
