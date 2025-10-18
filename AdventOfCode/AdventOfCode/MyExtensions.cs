@@ -82,6 +82,17 @@ namespace AdventOfCode
 			return coords;
 		}
 
+		public static int FindShortestPath(this int[,] grid, int input)
+		{
+			int[] exitIndex = new int[2];
+			int[] startIndex = new int[2];
+
+			exitIndex = grid.FindInputIndex(1);
+			startIndex = grid.FindInputIndex(input);
+
+			return 0;
+		}
+
 		// https://rosettacode.org/wiki/Tokenize_a_string_with_escaping#C.23
 		public static IEnumerable<string> Tokenize(this string input, char separator = '\n', char escape = '^')
 		{

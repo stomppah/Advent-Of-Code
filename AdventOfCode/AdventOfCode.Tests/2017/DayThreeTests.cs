@@ -36,5 +36,15 @@ namespace AdventOfCode.Tests._2017
             Assert.Equal(expected, found);
         }
 
+        [Theory]
+        [InlineData(TestInputs.DayThree, 12, 3)]
+        public void Find_Shortest_Path(string sequence, int find, int expected)
+        {
+            int[,] grid = sequence.ConvertToGrid();
+            int result = grid.FindShortestPath(find);
+
+            Assert.Equal(expected, result);
+        }
+
     }
 }
