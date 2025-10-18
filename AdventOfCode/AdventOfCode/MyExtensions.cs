@@ -36,6 +36,52 @@ namespace AdventOfCode
             return table;
         }
 
+		public static int[,] ConvertToGrid(this string data)
+        {
+            string[] lines = data.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+			int rows = lines.Length;
+			int cols = lines[0].Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Length;
+
+			int[,] grid = new int[rows, cols];
+
+			for (int r = 0; r < rows; r++)
+			{
+				string[] parts = lines[r].Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+				for (int c = 0; c < cols; c++)
+				{
+					grid[r, c] = int.Parse(parts[c]);
+				}
+			}
+
+			return grid;
+        }
+
+		public static int[] FindStartIndex(this int[,] grid)
+		{
+			int x = 0;
+            int y = 0;
+
+            for (int row= 0; row < 5; row++)
+            {
+                for (int col = 0; col < 5; col++)
+                {
+                    if(grid[row, col] == 1)
+                    {
+                        x=row;
+                        y=col;
+                        break;
+                    }
+                }
+            }
+
+			int[] coords = new int[2];
+			coords[0] = x;
+			coords[1] = y;
+
+			return coords;
+
+		}
+
 		// https://rosettacode.org/wiki/Tokenize_a_string_with_escaping#C.23
 		public static IEnumerable<string> Tokenize(this string input, char separator = '\n', char escape = '^')
 		{
