@@ -56,8 +56,9 @@ namespace AdventOfCode
 			return grid;
         }
 
-		public static int[] FindStartIndex(this int[,] grid)
+		public static int[] FindInputIndex(this int[,] grid, int input)
 		{
+
 			int x = 0;
             int y = 0;
 
@@ -65,7 +66,7 @@ namespace AdventOfCode
             {
                 for (int col = 0; col < 5; col++)
                 {
-                    if(grid[row, col] == 1)
+                    if(grid[row, col] == input)
                     {
                         x=row;
                         y=col;
@@ -79,7 +80,6 @@ namespace AdventOfCode
 			coords[1] = y;
 
 			return coords;
-
 		}
 
 		// https://rosettacode.org/wiki/Tokenize_a_string_with_escaping#C.23
