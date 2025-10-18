@@ -22,11 +22,9 @@ namespace AdventOfCode
         public static List<long[]> ConvertToList(this string spreadsheet)
         {
             List<long[]> table = new List<long[]>();
-            char newLine = Convert.ToChar(13);
-            string[] rowdata = spreadsheet.Split(newLine);
+            string[] rowdata = spreadsheet.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i <= rowdata.Length - 1; i++)
             {
-                rowdata[i] = rowdata[i].TrimStart('\n');
                 var rowStringData = rowdata[i].Contains('\t') ? rowdata[i].Split('\t') : rowdata[i].Split(' ');
                 var rowLongData = new long[rowStringData.Length];
                 for (int j = 0; j <= rowStringData.Length - 1; j++)
