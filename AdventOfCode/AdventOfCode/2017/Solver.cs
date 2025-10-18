@@ -6,6 +6,10 @@ namespace AdventOfCode._2017
 {
     public class Solver
     {
+        /**
+           Converts the input string into digits, traverses the circular list by comparing each digit to its immediate 
+           successor (wrapping the last digit back to the first), collects the matches, and returns their sum.
+         */
         public double SumOfRepeatedNumbersNextDigit(string sequence)
         {
             long[] digits = sequence.ConvertToLongArray();
@@ -23,6 +27,10 @@ namespace AdventOfCode._2017
             return matches.Sum();
         }
 
+        /**
+           Performs the same conversion while looking half the list length ahead, with modular wraparound. 
+           It sums the values of digits that match their midpoint partner to implement Day 1 part 2. 
+         */
         public double SumOfRepeatedNumbersExtended(string sequence)
         {
             long[] digits = sequence.ConvertToLongArray();
@@ -49,6 +57,11 @@ namespace AdventOfCode._2017
             return matches.Sum();
         }
 
+        /**
+           Examines each ordered pair in every parsed row to find evenly divisible numbers (excluding self-pairs), 
+           accumulates each division result per row, and sums those quotients for the final checksum, 
+           delivering Day 2 part 2.
+         */
         public double CalculateChecksum(string spreadsheet)
         {
             var table = spreadsheet.ConvertToList();
