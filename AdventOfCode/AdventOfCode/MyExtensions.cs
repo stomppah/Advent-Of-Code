@@ -90,7 +90,21 @@ namespace AdventOfCode
 			exitIndex = grid.FindInputIndex(1);
 			startIndex = grid.FindInputIndex(input);
 
-			return 0;
+			int result = 0;
+
+			if(exitIndex[0] == startIndex[0] && exitIndex[1] == startIndex[1])
+			{
+				return 0;
+			}
+			else if(exitIndex[0] < startIndex[0])
+			{
+				result = startIndex[0] - exitIndex[0];
+			}
+			else {
+				result = startIndex[0] + exitIndex[0];
+			}
+
+			return result;
 		}
 
 		// https://rosettacode.org/wiki/Tokenize_a_string_with_escaping#C.23

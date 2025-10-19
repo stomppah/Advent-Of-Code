@@ -37,7 +37,9 @@ namespace AdventOfCode.Tests._2017
         }
 
         [Theory]
+        [InlineData(TestInputs.DayThree, 1, 0)]
         [InlineData(TestInputs.DayThree, 12, 3)]
+        [InlineData(TestInputs.DayThree, 23, 2)]
         public void Find_Shortest_Path(string sequence, int find, int expected)
         {
             int[,] grid = sequence.ConvertToGrid();
