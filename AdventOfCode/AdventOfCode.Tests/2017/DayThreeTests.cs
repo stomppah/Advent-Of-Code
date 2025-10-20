@@ -5,11 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace AdventOfCode.Tests._2017
 {
     public class DayThreeTests
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public DayThreeTests(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
         [Theory]
         [InlineData(TestInputs.DayThree, 1)]
         public void Test_ConvertToGrid_Output(string sequence, double expected)
@@ -48,5 +55,58 @@ namespace AdventOfCode.Tests._2017
             Assert.Equal(expected, result);
         }
 
+        [Fact]
+        public void Find_Shortest_Path_Extended()
+        {
+            int[,] grid = DayThreeExtended();
+
+            int result = grid.FindShortestPath(23);
+
+            // Print the centre 11x11 region around 1
+            int mid = (int)Math.Ceiling(Math.Sqrt(3000000)) / 2;
+            for (int i = mid - 2; i <= mid + 2; i++)
+            {
+                for (int j = mid - 2; j <= mid + 2; j++)
+                    _testOutputHelper.WriteLine(grid[i, j].ToString().PadLeft(6));
+                _testOutputHelper.WriteLine("");
+            }
+
+            Assert.Equal(2, result);
+        }
+
+        public int[,] DayThreeExtended()
+        {
+            int target = 3000000;
+            int size = (int)Math.Ceiling(Math.Sqrt(target));
+            if (size % 2 == 0) size++; // ensure odd dimensions so 1 stays centred
+
+            int[,] grid = new int[size, size];
+            int x = size / 2;
+            int y = size / 2;
+            grid[y, x] = 1;
+
+            int num = 2;
+            int step = 1;
+
+            while (num <= target)
+            {
+                // right
+                for (int i = 0; i < step && num <= target; i++) grid[y, ++x] = num++;
+                // up
+                for (int i = 0; i < step && num <= target; i++) grid[--y, x] = num++;
+
+                step++;
+
+                // left
+                for (int i = 0; i < step && num <= target; i++) grid[y, --x] = num++;
+                // down
+                for (int i = 0; i < step && num <= target; i++) grid[++y, x] = num++;
+
+                step++;
+            }
+            
+            _testOutputHelper.WriteLine("Spiral generated up to " + target + " (" + size + "x" + size + ")");
+            return grid;
+        }
     }
 }
