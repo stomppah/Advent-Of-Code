@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="2019\" />
-    <Folder Include="2017\" />
+        <Folder Include="2017\" />
   </ItemGroup>
 
 </Project>
