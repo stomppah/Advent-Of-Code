@@ -58,18 +58,14 @@ namespace AdventOfCode.Tests._2017
         [Fact]
         public void Find_Shortest_Path_Extended()
         {
+            var testInput = 11;
             int[,] grid = DayThreeExtended();
+            var indexOfOne = grid.FindInputIndex(testInput);
 
-            int result = grid.FindShortestPath(23);
+            _testOutputHelper.WriteLine("Index of " + testInput +": " + indexOfOne[0] + "," + indexOfOne[1]);
+            _testOutputHelper.WriteLine("Value at index: " + grid[indexOfOne[0], indexOfOne[1]]);
 
-            // Print the centre 11x11 region around 1
-            int mid = (int)Math.Ceiling(Math.Sqrt(3000000)) / 2;
-            for (int i = mid - 2; i <= mid + 2; i++)
-            {
-                for (int j = mid - 2; j <= mid + 2; j++)
-                    _testOutputHelper.WriteLine(grid[i, j].ToString().PadLeft(6));
-                _testOutputHelper.WriteLine("");
-            }
+            int result = grid.FindShortestPath(testInput);
 
             Assert.Equal(2, result);
         }
