@@ -58,7 +58,7 @@ namespace AdventOfCode.Tests._2017
         [Fact]
         public void Find_Shortest_Path_Extended()
         {
-            var testInput = 11;
+            var testInput = 1024;
             int[,] grid = DayThreeExtended();
             var indexOfOne = grid.FindInputIndex(testInput);
 
@@ -67,7 +67,7 @@ namespace AdventOfCode.Tests._2017
 
             int result = grid.FindShortestPath(testInput);
 
-            Assert.Equal(2, result);
+            Assert.Equal(31, result);
         }
 
         public int[,] DayThreeExtended()
