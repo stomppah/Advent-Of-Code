@@ -60,11 +60,19 @@ namespace AdventOfCode
 		{
 
 			int x = 0;
-            int y = 0;
+			int y = 0;
+			
+			var rowLength = grid.GetLength(0);
+			var colLength = grid.GetLength(1);
 
-            for (int row= 0; row < 5; row++)
+			if (input == 1)
             {
-                for (int col = 0; col < 5; col++)
+                return new int[] { rowLength / 2, colLength / 2 };
+            }
+
+            for (int row= 0; row < rowLength; row++)
+            {
+                for (int col = 0; col < colLength; col++)
                 {
                     if(grid[row, col] == input)
                     {
