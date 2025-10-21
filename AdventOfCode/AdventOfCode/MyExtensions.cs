@@ -92,23 +92,23 @@ namespace AdventOfCode
 
 		public static int FindShortestPath(this int[,] grid, int input)
 		{
-			int[] exitIndex = new int[2];
-			int[] startIndex = new int[2];
-
-			exitIndex = grid.FindInputIndex(1);
-			startIndex = grid.FindInputIndex(input);
+			int[] exitIndex = grid.FindInputIndex(1);
+			int[] startIndex = grid.FindInputIndex(input);
 
 			int result = 0;
 
-			if(exitIndex[0] == startIndex[0] && exitIndex[1] == startIndex[1])
+			if (exitIndex[0] == startIndex[0] && exitIndex[1] == startIndex[1])
 			{
-				return 0;
+				return result;
 			}
-			else if(exitIndex[0] < startIndex[0])
+			// exitIndex = 866, 866
+			// startIndex = 866, 868
+			if (exitIndex[0] < startIndex[0])
 			{
 				result = startIndex[0] - exitIndex[0];
 			}
-			else {
+			else
+			{
 				result = startIndex[0] + exitIndex[0];
 			}
 
