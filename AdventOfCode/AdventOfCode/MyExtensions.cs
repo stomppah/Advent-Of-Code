@@ -37,7 +37,16 @@ namespace AdventOfCode
         }
 
 		public static int[,] ConvertToGrid(this string data)
-        {
+		{
+			if (data == "")
+			{
+				throw new ArgumentException("Input data cannot be empty.");
+			}
+			if (data == null)
+			{
+				throw new ArgumentNullException("Input data cannot be null.");
+			}
+			
             string[] lines = data.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 			int rows = lines.Length;
 			int cols = lines[0].Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Length;
@@ -56,11 +65,11 @@ namespace AdventOfCode
 			return grid;
         }
 
-		public static double[] FindInputIndex(this double[,] grid, int input)
+		public static double[] FindInputIndex(this double[,] grid, double input)
 		{
 
-			int x = 0;
-			int y = 0;
+			int x = -1;
+			int y = -1;
 			
 			var rowLength = grid.GetLength(0);
 			var colLength = grid.GetLength(1);
@@ -70,18 +79,19 @@ namespace AdventOfCode
                 return new double[] { rowLength / 2, colLength / 2 };
             }
 
-            for (int row= 0; row < rowLength; row++)
-            {
-                for (int col = 0; col < colLength; col++)
-                {
-                    if(grid[row, col] == input)
-                    {
-                        x=row;
-                        y=col;
-                        break;
-                    }
-                }
-            }
+			for (int row = 0; row < rowLength; row++)
+			{
+				for (int col = 0; col < colLength; col++)
+				{
+					if (grid[row, col] == input)
+					{
+						// found it
+						x = row;
+						y = col;
+						break;
+					}
+				}
+			}
 
 			double[] coords = new double[2];
 			coords[0] = x;
@@ -90,11 +100,16 @@ namespace AdventOfCode
 			return coords;
 		}
 
-		public static double FindShortestPath(this double[,] grid, int input)
+		public static double FindShortestPath(this double[,] grid, double input)
 		{
 			double[] exitIndex = grid.FindInputIndex(1);
 			double[] startIndex = grid.FindInputIndex(input);
 
+			if (startIndex[0] == -1 && startIndex[1] == -1)
+			{
+				return -1;
+			}
+			
 			double result = 0;
 
 			if (exitIndex[0] == startIndex[0] && exitIndex[1] == startIndex[1])

@@ -27,27 +27,45 @@ namespace AdventOfCode.Tests._2017
         [InlineData(TestInputs.DayThree, 1, 0)]
         [InlineData(TestInputs.DayThree, 12, 3)]
         [InlineData(TestInputs.DayThree, 23, 2)]
-        public void Find_Shortest_Path(int size, int find, int expected)
+        [InlineData(1999, 1024, 31)]
+        public void FindShortestPath_ShouldReturnCorrectDistance_WhenValidInputProvided(double size, double find, int expected)
         {
             double[,] grid = SpiralGridHelper.Generate(size, _testOutputHelper);
             double result = grid.FindShortestPath(find);
-
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Find_Shortest_Path_Extended()
+        // --- ❗ EDGE CASE TESTS ---
+
+        [Theory]
+        [InlineData("", typeof(ArgumentException))]
+        [InlineData(null, typeof(ArgumentNullException))]
+        public void ConvertToGrid_ShouldThrowException_WhenInputIsInvalid(string sequence, Type expectedException)
         {
-            var testInput = 1024;
-            double[,] grid = SpiralGridHelper.Generate(1999, _testOutputHelper);
-            double[] indexOfOne = grid.FindInputIndex(testInput);
+            Assert.Throws(expectedException, () => sequence.ConvertToGrid());
+        }
 
-            _testOutputHelper.WriteLine("Index of " + testInput + ": " + indexOfOne[0] + "," + indexOfOne[1]);
-            _testOutputHelper.WriteLine("Value at index: " + grid[(int)indexOfOne[0], (int)indexOfOne[1]]);
+        [Fact]
+        public void FindInputIndex_ShouldHandleMissingValueGracefully()
+        {
+            var grid = SpiralGridHelper.Generate(10, _testOutputHelper);
+            var index = grid.FindInputIndex(9999);
+            Assert.True(index[0] == -1 && index[1] == -1);
+        }
 
-            double result = grid.FindShortestPath(testInput);
+        [Fact]
+        public void FindShortestPath_ShouldReturnMinusOne_WhenValueNotFound()
+        {
+            double[,] grid = SpiralGridHelper.Generate(50, _testOutputHelper);
+            double result = grid.FindShortestPath(9999);
+            Assert.Equal(-1, result);
+        }
 
-            Assert.Equal(31, result);
+        [Fact]
+        public void ConvertToGrid_ShouldGenerateSingleElementGrid_WhenInputIsMinimal()
+        {
+            var grid = SpiralGridHelper.Generate(1, _testOutputHelper);
+            Assert.Equal(1, grid[grid.GetLength(0) / 2, grid.GetLength(1) / 2]);
         }
 
         // --- ⚙️ PERFORMANCE TESTS ---
