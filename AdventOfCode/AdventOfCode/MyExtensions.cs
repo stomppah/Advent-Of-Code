@@ -56,7 +56,7 @@ namespace AdventOfCode
 			return grid;
         }
 
-		public static int[] FindInputIndex(this int[,] grid, int input)
+		public static double[] FindInputIndex(this double[,] grid, int input)
 		{
 
 			int x = 0;
@@ -67,7 +67,7 @@ namespace AdventOfCode
 
 			if (input == 1)
             {
-                return new int[] { rowLength / 2, colLength / 2 };
+                return new double[] { rowLength / 2, colLength / 2 };
             }
 
             for (int row= 0; row < rowLength; row++)
@@ -83,19 +83,19 @@ namespace AdventOfCode
                 }
             }
 
-			int[] coords = new int[2];
+			double[] coords = new double[2];
 			coords[0] = x;
 			coords[1] = y;
 
 			return coords;
 		}
 
-		public static int FindShortestPath(this int[,] grid, int input)
+		public static double FindShortestPath(this double[,] grid, int input)
 		{
-			int[] exitIndex = grid.FindInputIndex(1);
-			int[] startIndex = grid.FindInputIndex(input);
+			double[] exitIndex = grid.FindInputIndex(1);
+			double[] startIndex = grid.FindInputIndex(input);
 
-			int result = 0;
+			double result = 0;
 
 			if (exitIndex[0] == startIndex[0] && exitIndex[1] == startIndex[1])
 			{
