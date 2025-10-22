@@ -104,47 +104,33 @@ namespace AdventOfCode
 		{
 			double[] exitIndex = grid.FindInputIndex(1);
 			double[] startIndex = grid.FindInputIndex(input);
+			double result = 0;
 
 			if (startIndex[0] == -1 && startIndex[1] == -1)
 			{
 				return -1;
 			}
-			
-			double result = 0;
-
 			if (exitIndex[0] == startIndex[0] && exitIndex[1] == startIndex[1])
 			{
 				return result;
 			}
-			// Input: 11
-			// exitIndex = 866, 866
-			// startIndex = 866, 868
-			// if (866 < 866)
 			if (exitIndex[0] < startIndex[0])
 			{
-				// Not taken
 				result += startIndex[0] - exitIndex[0]; 
 			}
-			// elseif (866 > 866)
 			else if (exitIndex[0] > startIndex[0])
 			{
-				// Not taken
-				result += startIndex[0] + exitIndex[0];		
+				result += exitIndex[0] - startIndex[0];		
 			}
-
-			// if (866 < 868)
 			if (exitIndex[1] < startIndex[1])
 			{
-				// result = 868 - 866 = 2
 				result += startIndex[1] - exitIndex[1];
 			}
-			// elseif (866 > 868)
 			else if (exitIndex[1] > startIndex[1])
 			{
-				result += startIndex[1] + exitIndex[1];
+				result += exitIndex[1] - startIndex[1];
 			}
 
-			// result
 			return result;
 		}
 

@@ -25,8 +25,21 @@ namespace AdventOfCode.Tests._2017
 
         [Theory]
         [InlineData(TestInputs.DayThree, 1, 0)]
+        [InlineData(TestInputs.DayThree, 2, 1)]
+        [InlineData(TestInputs.DayThree, 3, 2)]
+        [InlineData(TestInputs.DayThree, 4, 1)]
+        [InlineData(TestInputs.DayThree, 5, 2)]
+        [InlineData(TestInputs.DayThree, 6, 1)]
+        [InlineData(TestInputs.DayThree, 7, 2)]
+        [InlineData(TestInputs.DayThree, 8, 1)]
+        [InlineData(TestInputs.DayThree, 9, 2)]
+        [InlineData(TestInputs.DayThree, 10, 3)]
+        [InlineData(TestInputs.DayThree, 11, 2)]
         [InlineData(TestInputs.DayThree, 12, 3)]
+        [InlineData(TestInputs.DayThree, 13, 4)]
         [InlineData(TestInputs.DayThree, 23, 2)]
+        [InlineData(TestInputs.DayThree, 24, 3)]
+        [InlineData(TestInputs.DayThree, 25, 4)]
         [InlineData(1999, 1024, 31)]
         public void FindShortestPath_ShouldReturnCorrectDistance_WhenValidInputProvided(double size, double find, int expected)
         {
