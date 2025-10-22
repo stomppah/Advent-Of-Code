@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using Xunit.Abstractions;
+using AdventOfCode._2017;
 
 namespace AdventOfCode.Tests._2017
 {
@@ -92,43 +93,18 @@ namespace AdventOfCode.Tests._2017
             Assert.Equal(1, centerValue);
         }
 
-    }
+        // --- PART TWO TESTS ---
 
-    // --- 🔧 HELPER CLASS ---
-
-    internal static class SpiralGridHelper
-    {
-        public static double[,] Generate(double target, ITestOutputHelper output = null)
+        [Fact]
+        public void BuildValues_FirstTwentyThreeMatchKnownSequence()
         {
-            if (target <= 0)
-                throw new ArgumentException("Target must be positive.");
-
-            int size = (int)Math.Ceiling(Math.Sqrt(target));
-            if (size % 2 == 0) size++; // ensure odd dimensions so 1 stays centred
-
-            double[,] grid = new double[size, size];
-            int x = size / 2;
-            int y = size / 2;
-            grid[y, x] = 1;
-
-            int num = 2, step = 1;
-
-            while (num <= target)
+            // Known prefix from the problem description.
+            var expected = new[]
             {
-                // right
-                for (int i = 0; i < step && num <= target; i++) grid[y, ++x] = num++;
-                // up
-                for (int i = 0; i < step && num <= target; i++) grid[--y, x] = num++;
-                step++;
-                // left
-                for (int i = 0; i < step && num <= target; i++) grid[y, --x] = num++;
-                // down
-                for (int i = 0; i < step && num <= target; i++) grid[++y, x] = num++;
-                step++;
-            }
-
-            output?.WriteLine($"Spiral grid generated up to {target} ({size}x{size}).");
-            return grid;
+                1, 1, 2, 4, 5, 10, 11, 23, 25, 26, 54, 57, 59, 122, 133, 142, 147, 304, 330, 351, 362, 747, 806
+            };
+            var actual = SpiralGrid.BuildValues(expected.Length);
+            Assert.Equal(expected, actual);
         }
     }
 }
