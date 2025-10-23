@@ -6,7 +6,7 @@ namespace AdventOfCode._2017
 {
     public static class SpiralGrid
     {
-        public static int[] BuildValues(int n)
+        public static int[,] BuildValues(int n)
         {
             if (n <= 0) throw new ArgumentException("Input must be a positive integer.", nameof(n));
 
@@ -18,7 +18,7 @@ namespace AdventOfCode._2017
             }
 
 
-            return new int[n];
+            return new int[n,n];
         }
     }
 }

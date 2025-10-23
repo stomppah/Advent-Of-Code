@@ -99,9 +99,13 @@ namespace AdventOfCode.Tests._2017
         public void BuildValues_FirstTwentyThreeMatchKnownSequence()
         {
             // Known prefix from the problem description.
-            var expected = new[]
+            var expected = new[,]
             {
-                1, 1, 2, 4, 5, 10, 11, 23, 25, 26, 54, 57, 59, 122, 133, 142, 147, 304, 330, 351, 362, 747, 806
+                {147, 142, 133, 122, 59 },
+                {304,  5,    4,   2, 25 },
+                {330,  10,   1,   1, 26 },
+                {351,  11,  23,  54, 57 },
+                {362, 747, 806, 940, 1051 }
             };
             var actual = SpiralGrid.BuildValues(expected.Length);
             Assert.Equal(expected, actual);
