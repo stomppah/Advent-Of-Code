@@ -6,19 +6,49 @@ namespace AdventOfCode._2017
 {
     public static class SpiralGrid
     {
-        public static int[,] BuildValues(int n)
+        public static int[,] BuildValues(int length)
         {
-            if (n <= 0) throw new ArgumentException("Input must be a positive integer.", nameof(n));
+            if (length <= 0) throw new ArgumentException("Input must be a positive integer.", nameof(length));
 
-            var values = new int[n];
+            // Build grid up to value n
+            int size = (int)Math.Ceiling(Math.Sqrt(length));
+            if (size % 2 == 0) size++; // ensure odd dimensions so 1 stays centred
 
-            for (int i = 0; i < n; i++)
+            int[,] grid = new int[size, size];
+            int x = size / 2;
+            int y = size / 2;
+            grid[y, x] = 1;
+
+            int num = 2, step = 1;
+
+            while (num <= length)
             {
-                values[i] = i + 1; // Example logic: fill with sequential numbers starting from 1
+                // right
+                for (int i = 0; i < step && num <= length; i++)
+                {
+                    grid[y, ++x] = grid.GetAdjacentSum(x, y);  
+                }
+                // up
+                for (int i = 0; i < step && num <= length; i++)
+                {
+
+                    grid[--y, x] = num++; 
+                }
+                step++;
+                // left
+                for (int i = 0; i < step && num <= length; i++)
+                {
+                    grid[y, --x] = num++; 
+                }
+                // down
+                for (int i = 0; i < step && num <= length; i++)
+                {
+                    grid[++y, x] = num++; 
+                }
+                step++;
             }
 
-
-            return new int[n,n];
+            return grid;
         }
     }
 }

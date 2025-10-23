@@ -116,11 +116,11 @@ namespace AdventOfCode
 			}
 			if (exitIndex[0] < startIndex[0])
 			{
-				result += startIndex[0] - exitIndex[0]; 
+				result += startIndex[0] - exitIndex[0];
 			}
 			else if (exitIndex[0] > startIndex[0])
 			{
-				result += exitIndex[0] - startIndex[0];		
+				result += exitIndex[0] - startIndex[0];
 			}
 			if (exitIndex[1] < startIndex[1])
 			{
@@ -133,6 +133,36 @@ namespace AdventOfCode
 
 			return result;
 		}
+		
+		public static int GetAdjacentSum(this int[,] grid, int x, int y)
+        {
+			var total = 0;
+			var boundsX = grid.GetLength(1);
+			var boundsY = grid.GetLength(0);
+
+			// var isInBounds = (int checkX, int checkY) =>
+			// {
+			// 	return checkX >= 0 && checkX < boundsX && checkY >= 0 && checkY < boundsY;
+			// };
+
+			if (x + 1 < boundsX)
+				total += grid[y, x + 1];   // right
+			if (x + 1 < boundsX && y + 1 < boundsY)
+				total += grid[y + 1, x + 1]; // down-right
+			if (y + 1 < boundsY)
+				total += grid[y + 1, x];   // down
+			if (x - 1 >= 0 && y + 1 < boundsY)
+				total += grid[y + 1, x - 1]; // down-left
+			if (x - 1 >= 0)
+				total += grid[y, x - 1];   // left
+			if (x - 1 >= 0 && y - 1 >= 0)
+				total += grid[y - 1, x - 1]; // up-left
+			if (y - 1 >= 0)
+				total += grid[y - 1, x];   // up
+			if (x + 1 < boundsX && y - 1 >= 0)
+				total += grid[y - 1, x + 1]; // up-right
+			return total;
+        }
 
 		// https://rosettacode.org/wiki/Tokenize_a_string_with_escaping#C.23
 		public static IEnumerable<string> Tokenize(this string input, char separator = '\n', char escape = '^')
