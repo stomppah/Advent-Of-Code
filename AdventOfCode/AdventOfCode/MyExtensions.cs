@@ -139,12 +139,7 @@ namespace AdventOfCode
 			var total = 0;
 			var boundsX = grid.GetLength(1);
 			var boundsY = grid.GetLength(0);
-
-			// var isInBounds = (int checkX, int checkY) =>
-			// {
-			// 	return checkX >= 0 && checkX < boundsX && checkY >= 0 && checkY < boundsY;
-			// };
-
+			
 			if (x + 1 < boundsX)
 				total += grid[y, x + 1];   // right
 			if (x + 1 < boundsX && y + 1 < boundsY)
