@@ -44,6 +44,21 @@ namespace AdventOfCode
 	        return rowData.Select(row => row.Split((char[])null, StringSplitOptions.RemoveEmptyEntries)).ToList();
         }
 
+        public static int CountValidPassphrases(this List<string[]> input)
+        {
+	        var validCount = 0;
+	        foreach (var passphrase in input)
+	        {
+		        var uniqueWords = new HashSet<string>(passphrase);
+		        if (uniqueWords.Count == passphrase.Length)
+		        {
+			        validCount++;
+		        }
+	        }
+
+	        return validCount;
+        }
+
 		public static int[,] ConvertToGrid(this string data)
 		{
 			if (data == "")
@@ -52,7 +67,7 @@ namespace AdventOfCode
 			}
 			if (data == null)
 			{
-				throw new ArgumentNullException("Input data cannot be null.");
+				throw new ArgumentNullException($"Input data cannot be null.");
 			}
 			
             var lines = data.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
