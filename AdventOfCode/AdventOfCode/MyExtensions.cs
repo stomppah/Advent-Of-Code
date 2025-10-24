@@ -35,6 +35,13 @@ namespace AdventOfCode
             }
             return table;
         }
+        
+        public static List<string[]> ConvertToPassphraseList(this string input)
+        {
+	        var rowData = input.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+
+	        return rowData.Select(row => row.Split((char[])null, StringSplitOptions.RemoveEmptyEntries)).ToList();
+        }
 
 		public static int[,] ConvertToGrid(this string data)
 		{
