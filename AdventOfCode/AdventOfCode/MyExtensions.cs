@@ -18,11 +18,12 @@ namespace AdventOfCode
             }
             return digits;
         }
+        private static readonly char[] Separator = ['\r', '\n'];
 
         public static List<long[]> ConvertToList(this string spreadsheet)
         {
             var table = new List<long[]>();
-            var rowdata = spreadsheet.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var rowdata = spreadsheet.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
             for (var i = 0; i <= rowdata.Length - 1; i++)
             {
                 var rowStringData = rowdata[i].Contains('\t') ? rowdata[i].Split('\t') : rowdata[i].Split(' ');
@@ -38,7 +39,7 @@ namespace AdventOfCode
         
         public static List<string[]> ConvertToPassphraseList(this string input)
         {
-	        var rowData = input.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+	        var rowData = input.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
 
 	        return rowData.Select(row => row.Split((char[])null, StringSplitOptions.RemoveEmptyEntries)).ToList();
         }
@@ -54,7 +55,7 @@ namespace AdventOfCode
 				throw new ArgumentNullException("Input data cannot be null.");
 			}
 			
-            var lines = data.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = data.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
 			var rows = lines.Length;
 			var cols = lines[0].Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Length;
 
@@ -83,7 +84,7 @@ namespace AdventOfCode
 
 			if (input == 1)
             {
-                return new double[] { rowLength / 2, colLength / 2 };
+                return [rowLength / 2, colLength / 2];
             }
 
 			for (var row = 0; row < rowLength; row++)
