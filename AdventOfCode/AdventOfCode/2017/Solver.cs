@@ -12,10 +12,10 @@ namespace AdventOfCode._2017
          */
         public double SumOfRepeatedNumbersNextDigit(string sequence)
         {
-            long[] digits = sequence.ConvertToLongArray();
+            var digits = sequence.ConvertToLongArray();
 
-            List<long> matches = new List<long>();
-            for (int digitIndex = 0; digitIndex < digits.Length; digitIndex++)
+            var matches = new List<long>();
+            for (var digitIndex = 0; digitIndex < digits.Length; digitIndex++)
             {
                 var nextDigitInSequence = digitIndex < digits.Length - 1 ? digits[digitIndex + 1] : digits[0];
                 if (digits[digitIndex] == nextDigitInSequence)
@@ -33,11 +33,11 @@ namespace AdventOfCode._2017
          */
         public double SumOfRepeatedNumbersExtended(string sequence)
         {
-            long[] digits = sequence.ConvertToLongArray();
+            var digits = sequence.ConvertToLongArray();
             var deltaIndex = digits.Length / 2;
 
-            List<long> matches = new List<long>();
-            for (int digitIndex = 0; digitIndex < digits.Length; digitIndex++)
+            var matches = new List<long>();
+            for (var digitIndex = 0; digitIndex < digits.Length; digitIndex++)
             {
                 long nextDigitInSequence;
                 if ((digitIndex + deltaIndex) <= digits.Length - 1)
@@ -83,9 +83,9 @@ namespace AdventOfCode._2017
             foreach (var row in table)
             {
                 double divisionSum = 0;
-                for (int rowIndex = 0; rowIndex < row.Length; rowIndex++)
+                for (var rowIndex = 0; rowIndex < row.Length; rowIndex++)
                 {
-                    for (int nestedIndex = 0; nestedIndex < row.Length; nestedIndex++)
+                    for (var nestedIndex = 0; nestedIndex < row.Length; nestedIndex++)
                     {
                         if (row[rowIndex] % row[nestedIndex] == 0 && rowIndex != nestedIndex)
                         {

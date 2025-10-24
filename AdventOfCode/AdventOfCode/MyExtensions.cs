@@ -11,8 +11,8 @@ namespace AdventOfCode
 
         public static long[] ConvertToLongArray(this string sequence)
         {
-            long[] digits = new long[sequence.Length];
-            for (int sequenceIndex = 0; sequenceIndex < sequence.Length; sequenceIndex++)
+            var digits = new long[sequence.Length];
+            for (var sequenceIndex = 0; sequenceIndex < sequence.Length; sequenceIndex++)
             {
                 Int64.TryParse(sequence.Substring(sequenceIndex, 1), out digits[sequenceIndex]);
             }
@@ -21,13 +21,13 @@ namespace AdventOfCode
 
         public static List<long[]> ConvertToList(this string spreadsheet)
         {
-            List<long[]> table = new List<long[]>();
-            string[] rowdata = spreadsheet.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i <= rowdata.Length - 1; i++)
+            var table = new List<long[]>();
+            var rowdata = spreadsheet.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            for (var i = 0; i <= rowdata.Length - 1; i++)
             {
                 var rowStringData = rowdata[i].Contains('\t') ? rowdata[i].Split('\t') : rowdata[i].Split(' ');
                 var rowLongData = new long[rowStringData.Length];
-                for (int j = 0; j <= rowStringData.Length - 1; j++)
+                for (var j = 0; j <= rowStringData.Length - 1; j++)
                 {
                     Int64.TryParse(rowStringData[j], out rowLongData[j]);
                 }
@@ -47,16 +47,16 @@ namespace AdventOfCode
 				throw new ArgumentNullException("Input data cannot be null.");
 			}
 			
-            string[] lines = data.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-			int rows = lines.Length;
-			int cols = lines[0].Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Length;
+            var lines = data.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+			var rows = lines.Length;
+			var cols = lines[0].Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Length;
 
-			int[,] grid = new int[rows, cols];
+			var grid = new int[rows, cols];
 
-			for (int r = 0; r < rows; r++)
+			for (var r = 0; r < rows; r++)
 			{
-				string[] parts = lines[r].Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
-				for (int c = 0; c < cols; c++)
+				var parts = lines[r].Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+				for (var c = 0; c < cols; c++)
 				{
 					grid[r, c] = int.Parse(parts[c]);
 				}
@@ -68,8 +68,8 @@ namespace AdventOfCode
 		public static double[] FindInputIndex(this double[,] grid, double input)
 		{
 
-			int x = -1;
-			int y = -1;
+			var x = -1;
+			var y = -1;
 			
 			var rowLength = grid.GetLength(0);
 			var colLength = grid.GetLength(1);
@@ -79,9 +79,9 @@ namespace AdventOfCode
                 return new double[] { rowLength / 2, colLength / 2 };
             }
 
-			for (int row = 0; row < rowLength; row++)
+			for (var row = 0; row < rowLength; row++)
 			{
-				for (int col = 0; col < colLength; col++)
+				for (var col = 0; col < colLength; col++)
 				{
 					if (grid[row, col] == input)
 					{
@@ -93,7 +93,7 @@ namespace AdventOfCode
 				}
 			}
 
-			double[] coords = new double[2];
+			var coords = new double[2];
 			coords[0] = x;
 			coords[1] = y;
 
@@ -102,8 +102,8 @@ namespace AdventOfCode
 
 		public static double FindShortestPath(this double[,] grid, double input)
 		{
-			double[] exitIndex = grid.FindInputIndex(1);
-			double[] startIndex = grid.FindInputIndex(input);
+			var exitIndex = grid.FindInputIndex(1);
+			var startIndex = grid.FindInputIndex(input);
 			double result = 0;
 
 			if (startIndex[0] == -1 && startIndex[1] == -1)
@@ -169,8 +169,8 @@ namespace AdventOfCode
 		{
 			if (input == null) yield break;
 			var buffer = new StringBuilder();
-			bool escaping = false;
-			foreach (char c in input)
+			var escaping = false;
+			foreach (var c in input)
 			{
 				if (escaping)
 				{
@@ -195,7 +195,7 @@ namespace AdventOfCode
 
 		public static string Flush(this StringBuilder stringBuilder)
 		{
-			string result = stringBuilder.ToString();
+			var result = stringBuilder.ToString();
 			stringBuilder.Clear();
 			return result;
 		}

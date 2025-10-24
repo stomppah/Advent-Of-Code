@@ -19,8 +19,8 @@ namespace AdventOfCode.Tests._2017
         [InlineData(TestInputs.DayThree, 24)]
         public void FindInputIndex_ShouldReturnCorrectCoordinates_WhenValueExists(double size, double find)
         {
-            double[,] grid = SpiralGridHelper.Generate(size, _testOutputHelper);
-            double[] result = grid.FindInputIndex((int)find);
+            var grid = SpiralGridHelper.Generate(size, _testOutputHelper);
+            var result = grid.FindInputIndex((int)find);
             Assert.Equal(find, grid[(int)result[0], (int)result[1]]);
         }
 
@@ -44,8 +44,8 @@ namespace AdventOfCode.Tests._2017
         [InlineData(1999, 1024, 31)]
         public void FindShortestPath_ShouldReturnCorrectDistance_WhenValidInputProvided(double size, double find, int expected)
         {
-            double[,] grid = SpiralGridHelper.Generate(size, _testOutputHelper);
-            double result = grid.FindShortestPath(find);
+            var grid = SpiralGridHelper.Generate(size, _testOutputHelper);
+            var result = grid.FindShortestPath(find);
             Assert.Equal(expected, result);
         }
 
@@ -70,8 +70,8 @@ namespace AdventOfCode.Tests._2017
         [Fact]
         public void FindShortestPath_ShouldReturnMinusOne_WhenValueNotFound()
         {
-            double[,] grid = SpiralGridHelper.Generate(50, _testOutputHelper);
-            double result = grid.FindShortestPath(9999);
+            var grid = SpiralGridHelper.Generate(50, _testOutputHelper);
+            var result = grid.FindShortestPath(9999);
             Assert.Equal(-1, result);
         }
 
@@ -87,7 +87,7 @@ namespace AdventOfCode.Tests._2017
         [Fact]
         public void SpiralGrid_ShouldGenerateUpTo3MillionValues_AndStayCentered()
         {
-            int target = 3_000_000;
+            var target = 3_000_000;
             var grid = SpiralGridHelper.Generate(target, _testOutputHelper);
             var centerValue = grid[grid.GetLength(0) / 2, grid.GetLength(1) / 2];
             Assert.Equal(1, centerValue);
