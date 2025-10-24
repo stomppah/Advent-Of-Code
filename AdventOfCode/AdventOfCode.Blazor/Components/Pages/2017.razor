@@ -28,6 +28,18 @@
     <button class="btn btn-primary" @onclick="CalculateChecksumExtended">Click me</button>
 </div>
 
+<div>
+    <h1>Day Three</h1>
+
+    <p role="status">Part One Answer: @_dayThreePartOne</p>
+
+    <button class="btn btn-primary" @onclick="CalculateManhattanDistance">Click me</button>
+
+    <p role="status">Part Two Answer: @_dayThreePartTwo</p>
+
+    <button class="btn btn-primary" @onclick="Part2">Click me</button>
+</div>
+
 
 @code {
     private double _dayOnePartOne = 0;
@@ -35,6 +47,9 @@
 
     private double _dayTwoPartOne = 0;
     private double _dayTwoPartTwo = 0;
+    
+    private double _dayThreePartOne = 0;
+    private double _dayThreePartTwo = 0;
     
     private readonly Solver _solver = new Solver();
     
@@ -58,4 +73,14 @@
         _dayTwoPartTwo = _solver.CalculateChecksumExtended(PuzzleInputs.DayTwo);
     }
 
+    private void CalculateManhattanDistance()
+    {
+        _dayThreePartOne = _solver.CalculateManhattanDistance();
+    }
+    
+    // TODO: Implement this properly
+    private void Part2()
+    {
+        _dayThreePartTwo = _solver.PartTwoResult();
+    }
 }

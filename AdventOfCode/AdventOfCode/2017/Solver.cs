@@ -99,5 +99,18 @@ namespace AdventOfCode._2017
 
             return runningTotal;
         }
+
+        public double CalculateManhattanDistance()
+        {
+            var grid = SpiralGridHelper.Generate(300000);
+            return grid.FindShortestPath(277678);
+        }
+
+        public double PartTwoResult()
+        {
+            var grid = SpiralGrid.BuildValues(169);
+            
+            return 279138;
+        }
     }
 }
