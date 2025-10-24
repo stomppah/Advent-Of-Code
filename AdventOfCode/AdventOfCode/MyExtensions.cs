@@ -50,7 +50,11 @@ namespace AdventOfCode
 	        foreach (var passphrase in input)
 	        {
 		        var uniqueWords = new HashSet<string>(passphrase);
-		        if (uniqueWords.Count == passphrase.Length)
+		        var normalisedUniqueWords = uniqueWords.Select(row =>
+		        {
+			        return string.Concat(row.OrderBy(c => c));
+		        }).ToHashSet();
+		        if (normalisedUniqueWords.Count == passphrase.Length)
 		        {
 			        validCount++;
 		        }

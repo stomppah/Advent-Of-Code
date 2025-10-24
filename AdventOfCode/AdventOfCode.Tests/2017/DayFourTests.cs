@@ -1,18 +1,18 @@
-using System.Collections.Generic;
-
-namespace AdventOfCode.Tests._2017;
 using System;
+using System.Collections.Generic;
 using Xunit;
 using Xunit.Abstractions;
 using AdventOfCode._2017;
 
-public class DayFourTests
+namespace AdventOfCode.Tests._2017
 {
-    private const string Input = @"aa bb cc dd ee
+    public class DayFourTests
+    {
+        private const string PartOneInput = @"aa bb cc dd ee
 aa bb cc dd aa
 aa bb cc dd aaa";
 
-    private const string Input2 = @"nyot babgr babgr kqtu kqtu kzshonp ylyk psqk
+        private const string FinalInput = @"nyot babgr babgr kqtu kqtu kzshonp ylyk psqk
 iix ewj rojvbkk phrij iix zuajnk tadv givslju ewj bda
 isjur jppvano vctnpjp ngwzdq pxqfrk mnxxes zqwgnd giqh
 ojufqke gpd olzirc jfao cjfh rcivvw pqqpudp
@@ -525,58 +525,67 @@ gye efwwwiv kyv zmtcgmi ifwvwew
 dflx gdtb jyoj jyoj dflx aqhycgi xffnn
 inc mpys mzqmcwx vryz ibqrzc pmsy fat rojpxwy rcbqzi gjef";
 
-    private readonly ITestOutputHelper _consoleHelper;
+        private readonly ITestOutputHelper _consoleHelper;
 
-    /// <summary>
-    /// --- Day 4: High-Entropy Passphrases ---
-    /// A new system policy has been put in place that requires all accounts to use a passphrase instead of simply a password.
-    /// A passphrase consists of a series of words (lowercase letters) separated by spaces.
-    ///
-    /// To ensure security, a valid passphrase must contain no duplicate words.
-    ///
-    /// For example:
-    ///
-    /// aa bb cc dd ee is valid.
-    /// aa bb cc dd aa is not valid - the word aa appears more than once.
-    /// aa bb cc dd aaa is valid - aa and aaa count as different words.
-    /// The system's full passphrase list is available as your puzzle input.
-    /// </summary>
-    /// <param name="consoleHelper"></param>
-    public DayFourTests(ITestOutputHelper consoleHelper)
-    {
-        _consoleHelper = consoleHelper;
-    }
-
-    /// <summary>
-    /// To verify the implementation that determines the number of valid passphrases — where a valid
-    /// passphrase contains no duplicate words — you would typically:
-    ///
-    /// 1. Take a series of passphrases (each as a line or string of words separated by spaces).
-    /// 2. Split each passphrase into words.
-    /// 3. Check for duplicates.
-    /// 4. Count the valid ones.
-    /// 5. Compare the result to the expected output to ensure correctness.
-    /// </summary>
-    [Fact]
-    public void ConvertToPassphraseList_ShouldReturnCorrectList_WhenValidInputProvided()
-    {
-        var expected = new List<string[]>()
+        /// <summary>
+        /// --- Day 4: High-Entropy Passphrases ---
+        /// A new system policy has been put in place that requires all accounts to use a passphrase instead of simply a password.
+        /// A passphrase consists of a series of words (lowercase letters) separated by spaces.
+        ///
+        /// To ensure security, a valid passphrase must contain no duplicate words.
+        ///
+        /// For example:
+        ///
+        /// aa bb cc dd ee is valid.
+        /// aa bb cc dd aa is not valid - the word aa appears more than once.
+        /// aa bb cc dd aaa is valid - aa and aaa count as different words.
+        /// The system's full passphrase list is available as your puzzle input.
+        /// </summary>
+        /// <param name="consoleHelper"></param>
+        public DayFourTests(ITestOutputHelper consoleHelper)
         {
-            new string[] { "aa", "bb", "cc", "dd", "ee" },
-            new string[] { "aa", "bb", "cc", "dd", "aa" },
-            new string[] { "aa", "bb", "cc", "dd", "aaa" }
-        };
-        
-        var actual = Input.ConvertToPassphraseList();
-        Assert.Equal(expected, actual);
-    }
+            _consoleHelper = consoleHelper;
+        }
 
-    [Fact]
-    public void CountValidPassphrases_ShouldReturnCorrectResult_WhenValidInputProvided()
-    {
-        var passphrases = Input.ConvertToPassphraseList();
-        var validCount = passphrases.CountValidPassphrases(); 
-        Assert.Equal(2, validCount);
+        /// <summary>
+        /// To verify the implementation that determines the number of valid passphrases — where a valid
+        /// passphrase contains no duplicate words — you would typically:
+        ///
+        /// 1. Take a series of passphrases (each as a line or string of words separated by spaces).
+        /// 2. Split each passphrase into words.
+        /// 3. Check for duplicates.
+        /// 4. Count the valid ones.
+        /// 5. Compare the result to the expected output to ensure correctness.
+        /// </summary>
+        [Fact]
+        public void ConvertToPassphraseList_ShouldReturnCorrectList_WhenValidInputProvided()
+        {
+            var expected = new List<string[]>()
+            {
+                new string[] { "aa", "bb", "cc", "dd", "ee" },
+                new string[] { "aa", "bb", "cc", "dd", "aa" },
+                new string[] { "aa", "bb", "cc", "dd", "aaa" }
+            };
+
+            var actual = PartOneInput.ConvertToPassphraseList();
+            Assert.Equal(expected, actual);
+        }
+
+        private const string PartTwoInput = @"abcde fghij
+abcde xyz ecdab
+a ab abc abd abf abj
+iiii oiii ooii oooi oooo
+oiii ioii iioi iiio";
+
+        [Theory]
+        [InlineData(PartOneInput, 2)]
+        [InlineData(PartTwoInput, 3)]
+        [InlineData(FinalInput, 119)]
+        public void CountValidPassphrases_ShouldReturnCorrectResult_WhenValidInputProvided(string input, int expected)
+        {
+            var passphrases = input.ConvertToPassphraseList();
+            var validCount = passphrases.CountValidPassphrases();
+            Assert.Equal(expected, validCount);
+        }
     }
 }
-
