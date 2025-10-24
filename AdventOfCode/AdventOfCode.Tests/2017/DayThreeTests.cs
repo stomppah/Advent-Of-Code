@@ -102,10 +102,10 @@ namespace AdventOfCode.Tests._2017
             var expected = new[,]
             {
                 {147, 142, 133, 122, 59 },
-                {304,  5,    4,   2, 25 },
-                {330,  10,   1,   1, 26 },
-                {351,  11,  23,  54, 57 },
-                {362, 747, 806, 940, 1051 }
+                {304,  5,    4,   2, 57 },
+                {330,  10,   1,   1, 54 },
+                {351,  11,  23,  25, 26 },
+                {362, 747, 806, 880, 931 }
             };
             var actual = SpiralGrid.BuildValues(expected.Length);
             Assert.Equal(expected, actual);

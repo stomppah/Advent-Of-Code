@@ -26,24 +26,27 @@ namespace AdventOfCode._2017
                 // right
                 for (var i = 0; i < step && num <= length; i++)
                 {
-                    grid[y, ++x] = grid.GetAdjacentSum(x, y);  
+                    grid[y, ++x] = grid.GetAdjacentSum(x, y);
+                    num++;
                 }
                 // up
                 for (var i = 0; i < step && num <= length; i++)
                 {
-
-                    grid[--y, x] = num++; 
+                    grid[--y, x] = grid.GetAdjacentSum(x, y);
+                    num++;
                 }
                 step++;
                 // left
                 for (var i = 0; i < step && num <= length; i++)
                 {
-                    grid[y, --x] = num++; 
+                    grid[y, --x] = grid.GetAdjacentSum(x, y);
+                    num++;
                 }
                 // down
                 for (var i = 0; i < step && num <= length; i++)
                 {
-                    grid[++y, x] = num++; 
+                    grid[++y, x] = grid.GetAdjacentSum(x, y); 
+                    num++;
                 }
                 step++;
             }
