@@ -7,41 +7,64 @@
 <div>
     <h1>Day One</h1>
 
-    <p role="status">Part One Answer: @_dayOnePartOne</p>
-
-    <button class="btn btn-primary" @onclick="SumOfRepeatedNumbersNextDigit">Click me</button>
-
-    <p role="status">Part Two Answer: @_dayOnePartTwo</p>
-
-    <button class="btn btn-primary" @onclick="SumOfRepeatedNumbersExtended">Click me</button>
-</div>
+    <MudItem xs="12" sm="6" md="4">
+        <h3>Part One</h3>
+        @* <MudField Label="Part One Input" Variant="Variant.Text">Enter Value:</MudField> *@
+        @* <MudTextField @bind-Value="_dayOnePartOneInput" Label="With Helper" HelperText="Input Value" Variant="Variant.Filled" /> *@
+        <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="SumOfRepeatedNumbers">Calculate</MudButton>
+        <MudChip T="string">@_dayOnePartOne</MudChip>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <h3>Part Two</h3>
+        @* <MudField Label="Part One Input" Variant="Variant.Text">Enter Value:</MudField> *@
+        @* <MudTextField @bind-Value="_dayOnePartOneInput" Label="With Helper" HelperText="Input Value" Variant="Variant.Filled" /> *@
+        <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="SumOfRepeatedNumbersExtended">Calculate</MudButton>
+        <MudChip T="string">@_dayOnePartTwo</MudChip>
+    </MudItem>
+</div> 
 
 <div>
     <h1>Day Two</h1>
 
-    <p role="status">Part One Answer: @_dayTwoPartOne</p>
-
-    <button class="btn btn-primary" @onclick="CalculateChecksum">Click me</button>
-
-    <p role="status">Part Two Answer: @_dayTwoPartTwo</p>
-
-    <button class="btn btn-primary" @onclick="CalculateChecksumExtended">Click me</button>
+    <MudItem xs="12" sm="6" md="4">
+        <h3>Part One</h3>
+        @* <MudField Label="Part One Input" Variant="Variant.Text">Enter Value:</MudField> *@
+        @* <MudTextField @bind-Value="_dayOnePartOneInput" Label="With Helper" HelperText="Input Value" Variant="Variant.Filled" /> *@
+        <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="CalculateChecksum">Calculate</MudButton>
+        <MudChip T="string">@_dayTwoPartOne</MudChip>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <h3>Part Two</h3>
+        @* <MudField Label="Part One Input" Variant="Variant.Text">Enter Value:</MudField> *@
+        @* <MudTextField @bind-Value="_dayOnePartOneInput" Label="With Helper" HelperText="Input Value" Variant="Variant.Filled" /> *@
+        <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="CalculateChecksumExtended">Calculate</MudButton>
+        <MudChip T="string">@_dayTwoPartTwo</MudChip>
+    </MudItem>
 </div>
-
 <div>
     <h1>Day Three</h1>
 
-    <p role="status">Part One Answer: @_dayThreePartOne</p>
-
-    <button class="btn btn-primary" @onclick="CalculateManhattanDistance">Click me</button>
-
-    <p role="status">Part Two Answer: @_dayThreePartTwo</p>
-
-    <button class="btn btn-primary" @onclick="Part2">Click me</button>
+    <MudItem xs="12" sm="6" md="4">
+        <h3>Part One</h3>
+        @* <MudField Label="Part One Input" Variant="Variant.Text">Enter Value:</MudField> *@
+        @* <MudTextField @bind-Value="_dayOnePartOneInput" Label="With Helper" HelperText="Input Value" Variant="Variant.Filled" /> *@
+        <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="CalculateManhattanDistance">Calculate</MudButton>
+        <MudChip T="string">@_dayThreePartOne</MudChip>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <h3>Part Two</h3>
+        @* <MudField Label="Part One Input" Variant="Variant.Text">Enter Value:</MudField> *@
+        @* <MudTextField @bind-Value="_dayOnePartOneInput" Label="With Helper" HelperText="Input Value" Variant="Variant.Filled" /> *@
+        <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="Part2">Calculate</MudButton>
+        <MudChip T="string">@_dayThreePartTwo</MudChip>
+    </MudItem>
 </div>
 
-
 @code {
+    [Inject] private IDialogService DialogService { get; set; }
+
+    string state = "Message box hasn't been opened yet";
+
     private double _dayOnePartOne = 0;
     private double _dayOnePartTwo = 0;
 
@@ -52,35 +75,71 @@
     private double _dayThreePartTwo = 0;
     
     private readonly Solver _solver = new Solver();
-    
-    private void SumOfRepeatedNumbersNextDigit()
+
+    private async void SumOfRepeatedNumbers()
     {
         _dayOnePartOne = _solver.SumOfRepeatedNumbersNextDigit(PuzzleInputs.DayOne);
+        bool? result = await DialogService.ShowMessageBox(
+           "Info",
+           $"Answer: {_dayOnePartOne}",
+           yesText: "Ok!", cancelText: "Cancel");
+        state = result == null ? "Canceled" : "Deleted!";
+        StateHasChanged();  
     }
     
-    private void SumOfRepeatedNumbersExtended()
+    private async void SumOfRepeatedNumbersExtended()
     {
         _dayOnePartTwo = _solver.SumOfRepeatedNumbersExtended(PuzzleInputs.DayOne);
+        bool? result = await DialogService.ShowMessageBox(
+           "Info",
+           $"Answer: {_dayOnePartTwo}",
+           yesText: "Ok!", cancelText: "Cancel");
+        state = result == null ? "Canceled" : "Deleted!";
+        StateHasChanged();
     }
     
-    private void CalculateChecksum()
+    private async void CalculateChecksum()
     {
         _dayTwoPartOne = _solver.CalculateChecksum(PuzzleInputs.DayTwo);
+        bool? result = await DialogService.ShowMessageBox(
+           "Info",
+           $"Answer: {_dayTwoPartOne}",
+           yesText: "Ok!", cancelText: "Cancel");
+        state = result == null ? "Canceled" : "Deleted!";
+        StateHasChanged();
     }
     
-    private void CalculateChecksumExtended()
+    private async void CalculateChecksumExtended()
     {
         _dayTwoPartTwo = _solver.CalculateChecksumExtended(PuzzleInputs.DayTwo);
+        bool? result = await DialogService.ShowMessageBox(
+           "Info",
+           $"Answer: {_dayTwoPartTwo}",
+           yesText: "Ok!", cancelText: "Cancel");
+        state = result == null ? "Canceled" : "Deleted!";
+        StateHasChanged();
     }
 
-    private void CalculateManhattanDistance()
+    private async void CalculateManhattanDistance()
     {
         _dayThreePartOne = _solver.CalculateManhattanDistance();
+        bool? result = await DialogService.ShowMessageBox(
+           "Info",
+           $"Answer: {_dayThreePartTwo}",
+           yesText: "Ok!", cancelText: "Cancel");
+        state = result == null ? "Canceled" : "Deleted!";
+        StateHasChanged();
     }
     
     // TODO: Implement this properly
-    private void Part2()
+    private async void Part2()
     {
         _dayThreePartTwo = _solver.PartTwoResult();
+        bool? result = await DialogService.ShowMessageBox(
+           "Info",
+           $"Answer: {_dayThreePartTwo}",
+           yesText: "Ok!", cancelText: "Cancel");
+        state = result == null ? "Canceled" : "Deleted!";
+        StateHasChanged();
     }
 }
