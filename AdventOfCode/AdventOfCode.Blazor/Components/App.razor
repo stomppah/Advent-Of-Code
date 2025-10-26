@@ -13,11 +13,11 @@
 
     <ImportMap/>
     <link rel="icon" type="image/png" href="favicon.png"/>
-    <HeadOutlet/>
+    <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
 <body>
-<Routes/>
+<Routes @rendermode="InteractiveServer" />
 <script src="_framework/blazor.web.js"></script>
 <!-- Important: Increment the version parameter whenever you update MudBlazor to prevent caching issues -->
 <script src="_content/MudBlazor/MudBlazor.min.js?v=1"></script>
