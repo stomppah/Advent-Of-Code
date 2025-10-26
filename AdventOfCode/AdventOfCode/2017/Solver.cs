@@ -112,5 +112,10 @@ namespace AdventOfCode._2017
             
             return 279138;
         }
+
+        public double FindExit(List<int> sequence, double startIndex)
+        {
+            return 0;
+        }
     }
 }
