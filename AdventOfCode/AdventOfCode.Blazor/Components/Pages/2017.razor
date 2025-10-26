@@ -125,7 +125,7 @@
         _dayThreePartOne = _solver.CalculateManhattanDistance();
         bool? result = await DialogService.ShowMessageBox(
            "Info",
-           $"Answer: {_dayThreePartTwo}",
+           $"Answer: {_dayThreePartOne}",
            yesText: "Ok!", cancelText: "Cancel");
         state = result == null ? "Canceled" : "Deleted!";
         StateHasChanged();
