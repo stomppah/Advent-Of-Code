@@ -6,6 +6,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <MudAllowedAttributePattern>LowerCase</MudAllowedAttributePattern>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="MudBlazor" Version="8.13.0" />
     </ItemGroup>
